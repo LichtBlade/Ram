@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/bg1"
     android:textAlignment="center"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText, ContentDescription">
+
+    <!--nakadepende sa image size yung dimensionratio   -->
+    <!--dapat 0dp ang layout width at height-->
+    <!--layout_constraintWidth_percent="0.7"  //  yung width ng image ay equal sa 70% ng screen-->
 
     <ImageView
         android:id="@+id/img_logo"
@@ -16,29 +20,27 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline"
         app:layout_constraintDimensionRatio="2.726326743:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.891"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/gl_top"
-        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/phinma_logo" />
-    <!--nakadepende sa image size yung dimensionratio   -->
-    <!--dapat 0dp ang layout width at height-->
-    <!--layout_constraintWidth_percent="0.7"  //  yung width ng image ay equal sa 70% ng screen-->
 
     <TextView
         android:id="@+id/login_tv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/poppins"
         android:text="Login"
-        android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.5"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.001"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintTop_toTopOf="@id/gl_top"
+        tools:layout_editor_absoluteY="21dp" />
 
     <TextView
         android:id="@+id/signin_tv"
@@ -47,41 +49,41 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/open_sans"
         android:text="Sign in to Continue"
-        android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.2"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/login_tv"
-        app:layout_constraintWidth_percent="0.35" />
+        app:layout_constraintTop_toBottomOf="@id/login_tv"
+        tools:layout_editor_absoluteY="83dp" />
 
     <TextView
         android:id="@+id/id_tv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/open_sans"
         android:text="Please enter ID number"
-        android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.2"
         app:layout_constraintEnd_toStartOf="@+id/gl_center"
-        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintHorizontal_bias="0.006"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/signin_tv"
-        app:layout_constraintWidth_percent="0.35" />
+        app:layout_constraintTop_toBottomOf="@+id/signin_tv" />
 
     <Button
         android:id="@+id/btn_editprofile_confirm"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="160dp"
         android:background="@drawable/button_bg"
         android:text="LOGIN"
         android:textColor="@color/white"
         android:textSize="23sp"
         app:layout_constraintBottom_toTopOf="@+id/gl_bot"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.826"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -124,36 +126,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="#000000"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="394dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!--    <com.google.android.material.textfield.TextInputLayout-->
-    <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-    <!--        android:id="@+id/et_layout"-->
-    <!--        android:layout_width="250dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="22dp"-->
-    <!--        android:hint="ID"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/gl_end"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/gl_start"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/id_tv">-->
-
-    <!--        <com.google.android.material.textfield.TextInputEditText-->
-    <!--            android:id="@+id/et_input"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content" />-->
-    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+        app:layout_constraintGuide_percent="0.19" />
 </androidx.constraintlayout.widget.ConstraintLayout>
