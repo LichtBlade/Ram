@@ -24,7 +24,7 @@
         android:layout_marginTop="176dp"
         android:layout_marginEnd="48dp"
         android:fontFamily="@font/poppins"
-        android:text="My Appointments"
+        android:text="wawawawa"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
