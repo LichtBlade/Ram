@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/bg1"
     android:textAlignment="center"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText, ContentDescription">
@@ -72,13 +72,13 @@
 
     <Button
         android:id="@+id/btn_editprofile_confirm"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="88dp"
         android:background="@drawable/button_bg"
         android:text="LOGIN"
         android:textColor="@color/white"
-        android:textSize="23sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/gl_bot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -124,36 +124,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="#000000"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="394dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!--    <com.google.android.material.textfield.TextInputLayout-->
-    <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-    <!--        android:id="@+id/et_layout"-->
-    <!--        android:layout_width="250dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="22dp"-->
-    <!--        android:hint="ID"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/gl_end"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/gl_start"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/id_tv">-->
-
-    <!--        <com.google.android.material.textfield.TextInputEditText-->
-    <!--            android:id="@+id/et_input"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content" />-->
-    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+        app:layout_constraintGuide_percent="0.17"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
