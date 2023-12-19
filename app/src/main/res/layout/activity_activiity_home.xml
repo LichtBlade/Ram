@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
-    tools:context=".home.ActiviityHome">
+    tools:context=".home.ActiviityHome"
+    tools:ignore="MissingClass">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -23,6 +24,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="176dp"
         android:layout_marginEnd="48dp"
+        android:fontFamily="@font/poppins"
         android:text="My Appointments"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -36,14 +38,14 @@
         android:layout_height="497dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:backgroundTint="#00FFFFFF"
         android:visibility="visible"
         app:cardCornerRadius="20dp"
         app:cardElevation="15dp"
         app:cardMaxElevation="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:ignore="MissingClass">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
