@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_begin="45dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_bot"
@@ -126,18 +126,24 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.17" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="#000000"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="394dp">
+    <EditText
+        android:id="@+id/et_studentID"
+        android:layout_width="313dp"
+        android:layout_height="48dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="03-2223-12345"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/id_tv"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="@+id/id_tv"
+        app:layout_constraintTop_toBottomOf="@+id/id_tv" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <!--    <com.google.android.material.textfield.TextInputLayout-->
     <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
