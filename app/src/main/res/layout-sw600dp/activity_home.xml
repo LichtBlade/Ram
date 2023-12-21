@@ -72,6 +72,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="My Appointments"
                 android:textSize="60sp"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
