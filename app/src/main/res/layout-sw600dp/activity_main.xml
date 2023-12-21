@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
+    android:background="@drawable/bg2"
     android:textAlignment="center"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText, ContentDescription">
@@ -31,8 +31,8 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:autoSizeTextType="uniform"
-        android:fontFamily="@font/poppins"
         android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
         android:text="Login"
         android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.5"
@@ -47,8 +47,8 @@
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/open_sans"
-        android:textColor="@color/black"
         android:text="Sign in to Continue"
+        android:textColor="@color/black"
         android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.2"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
@@ -62,8 +62,8 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:autoSizeTextType="uniform"
-        android:fontFamily="@font/open_sans"
         android:textColor="@color/black"
+        android:fontFamily="@font/open_sans"
         android:text="Please enter password"
         android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.2"
@@ -73,15 +73,74 @@
         app:layout_constraintTop_toBottomOf="@+id/et_studentID"
         app:layout_constraintWidth_percent="0.35" />
 
+    <EditText
+        android:id="@+id/et_studentID"
+        android:layout_width="450dp"
+        android:layout_height="65dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hintColor"
+        android:hint="00-0000-000000"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/id_tv"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="@+id/id_tv"
+        app:layout_constraintTop_toBottomOf="@+id/id_tv" />
+
+
+    <TextView
+        android:id="@+id/id_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        android:text="Please enter ID number"
+        android:textAlignment="center"
+        app:layout_constraintDimensionRatio="1:0.2"
+        app:layout_constraintEnd_toStartOf="@+id/gl_center"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toBottomOf="@+id/signin_tv"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="450dp"
+        android:layout_height="65dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="**********"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hintColor"
+        android:paddingStart="20dp"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="14dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/id_tv1"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="@+id/id_tv1"
+        app:layout_constraintTop_toBottomOf="@+id/id_tv1" />
+
     <Button
         android:id="@+id/btn_editprofile_confirm"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="88dp"
         android:background="@drawable/button_bg"
         android:text="LOGIN"
         android:textColor="@color/white"
-        android:textSize="23sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/gl_bot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -92,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="45dp" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_bot"
@@ -127,64 +186,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
-
-    <EditText
-        android:id="@+id/et_studentID"
-        android:layout_width="313dp"
-        android:layout_height="48dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:textColor="@color/black"
-        android:textColorHint="@color/hintColor"
-        android:fontFamily="@font/poppins"
-        android:hint="00-0000-000000"
-        android:inputType="text"
-        android:paddingStart="20dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="14dp"
-        android:paddingBottom="10dp"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/id_tv"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toStartOf="@+id/id_tv"
-        app:layout_constraintTop_toBottomOf="@+id/id_tv" />
-
-    <TextView
-        android:id="@+id/id_tv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        android:autoSizeTextType="uniform"
-        android:textColor="@color/black"
-        android:fontFamily="@font/open_sans"
-        android:text="Please enter ID number"
-        android:textAlignment="center"
-        app:layout_constraintDimensionRatio="1:0.2"
-        app:layout_constraintEnd_toStartOf="@+id/gl_center"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/signin_tv"
-        app:layout_constraintWidth_percent="0.35" />
-
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="313dp"
-        android:layout_height="48dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:textColor="@color/black"
-        android:textColorHint="@color/hintColor"
-        android:hint="**********"
-        android:paddingStart="20dp"
-        android:fontFamily="@font/poppins"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingEnd="14dp"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/id_tv1"
-        app:layout_constraintHorizontal_bias="0.071"
-        app:layout_constraintStart_toStartOf="@+id/id_tv1"
-        app:layout_constraintTop_toBottomOf="@+id/id_tv1" />
-
+        app:layout_constraintGuide_percent="0.17"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.RAM"
         tools:targetApi="31">
         <activity
-            android:name=".home.ActiviityHome"
+            android:name=".ActivityHome"
             android:exported="false" />
         <activity
             android:name=".Splash"
@@ -26,10 +26,6 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
-
-        <activity
-            android:name=".authentication.Authentication"
             android:exported="false" />
     </application>
 

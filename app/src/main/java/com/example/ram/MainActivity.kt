@@ -3,8 +3,8 @@ package com.example.ram
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ram.authentication.Authentication
 import com.example.ram.databinding.ActivityMainBinding
+import com.example.ram.ActivityHome
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -12,9 +12,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.btnStudent.setOnClickListener {
-            val intent = Intent(this,Authentication::class.java)
-            startActivity(intent)
+
+        binding.btnEditprofileConfirm.setOnClickListener {
+            if(validation()){
+                startActivity(Intent(this,ActivityHome::class.java))
+                finish()
+            }
         }
+    }
+
+    private fun validation():Boolean{
+        val student = binding.etStudentID?.text.toString()
+        val password = binding.etPassword?.text.toString()
+
+        if(student.isEmpty()){
+            binding.etStudentID?.error = "Please fill up"
+            return false
+        }
+
+        if (password.isEmpty()){
+            binding.etPassword?.error = "Please fill up"
+            return false
+        }
+        return true
     }
 }
