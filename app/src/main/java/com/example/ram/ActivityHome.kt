@@ -1,14 +1,14 @@
-package com.example.ram.home
+package com.example.ram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ram.databinding.ActivityActiviityHomeBinding
+import com.example.ram.databinding.ActivityHomeBinding
 
 class ActivityHome : AppCompatActivity() {
-    private lateinit var binding: ActivityActiviityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityActiviityHomeBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
