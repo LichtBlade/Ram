@@ -72,8 +72,8 @@
 
     <EditText
         android:id="@+id/et_studentID"
-        android:layout_width="313dp"
-        android:layout_height="48dp"
+        android:layout_width="450dp"
+        android:layout_height="65dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
         android:fontFamily="@font/poppins"
@@ -108,8 +108,8 @@
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="313dp"
-        android:layout_height="48dp"
+        android:layout_width="450dp"
+        android:layout_height="65dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
         android:hint="**********"
