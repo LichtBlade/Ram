@@ -55,19 +55,19 @@
         app:layout_constraintWidth_percent="0.35" />
 
     <TextView
-        android:id="@+id/id_tv"
+        android:id="@+id/id_tv1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/open_sans"
-        android:text="Please enter ID number"
+        android:text="Please enter password"
         android:textAlignment="center"
         app:layout_constraintDimensionRatio="1:0.2"
-        app:layout_constraintEnd_toStartOf="@+id/gl_center"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/signin_tv"
+        app:layout_constraintEnd_toEndOf="@+id/et_studentID"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="@+id/et_studentID"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentID"
         app:layout_constraintWidth_percent="0.35" />
 
     <Button
@@ -132,18 +132,52 @@
         android:layout_height="48dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
-        android:hint="03-2223-12345"
+        android:fontFamily="@font/poppins"
+        android:hint="00-0000-000000"
         android:inputType="text"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="14dp"
         android:paddingBottom="10dp"
-        android:textSize="24sp"
+        android:textSize="21sp"
         app:layout_constraintEnd_toEndOf="@+id/id_tv"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="@+id/id_tv"
         app:layout_constraintTop_toBottomOf="@+id/id_tv" />
 
+    <TextView
+        android:id="@+id/id_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/open_sans"
+        android:text="Please enter ID number"
+        android:textAlignment="center"
+        app:layout_constraintDimensionRatio="1:0.2"
+        app:layout_constraintEnd_toStartOf="@+id/gl_center"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toBottomOf="@+id/signin_tv"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="313dp"
+        android:layout_height="48dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="**********"
+        android:paddingStart="20dp"
+        android:fontFamily="@font/poppins"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="14dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/id_tv1"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="@+id/id_tv1"
+        app:layout_constraintTop_toBottomOf="@+id/id_tv1" />
 
     <!--    <com.google.android.material.textfield.TextInputLayout-->
     <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
