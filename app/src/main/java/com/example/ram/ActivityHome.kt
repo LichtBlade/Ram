@@ -1,9 +1,8 @@
-package com.example.ram.home
+package com.example.ram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ram.databinding.ActivityHomeBinding
-
 
 class ActivityHome : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
