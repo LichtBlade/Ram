@@ -16,7 +16,7 @@
             android:name=".AppointmentPurpose"
             android:exported="false" />
         <activity
-            android:name=".ActivityHome"
+            android:name=".homepage.ActivityHome"
             android:exported="false" />
         <activity
             android:name=".Splash"
