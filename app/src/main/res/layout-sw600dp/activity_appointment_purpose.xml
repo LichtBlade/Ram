@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
-    tools:context="com.example.ram.homepage.ActivityHome"
-    tools:ignore="HardcodedText, ContentDescription">
+    tools:context=".AppointmentPurpose"
+    tools:ignore="HardcodedText, ContentDescription, MissingClass">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_start"
@@ -65,12 +65,12 @@
             android:background="@drawable/alphagradient">
 
             <TextView
-                android:id="@+id/tv_MyApp"
+                android:id="@+id/tv_Purpose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="My Appointments"
+                android:text="Purpose of Visit"
                 android:textSize="60sp"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,22 +84,34 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_MyApp"
-                app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/appointmentcard" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_Purpose"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_logout"
+        android:id="@+id/btn_next"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
-        android:text="LOGOUT"
+        android:text="NEXT"
         android:textColor="@color/white"
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintStart_toStartOf="@+id/gl_center"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
+        android:text="RETURN"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gl_center"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 

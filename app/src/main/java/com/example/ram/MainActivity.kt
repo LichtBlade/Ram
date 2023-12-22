@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ram.databinding.ActivityMainBinding
-import com.example.ram.ActivityHome
+import com.example.ram.homepage.ActivityHome
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnEditprofileConfirm.setOnClickListener {
             if(validation()){
-                startActivity(Intent(this,ActivityHome::class.java))
+                startActivity(Intent(this, ActivityHome::class.java))
                 finish()
             }
         }

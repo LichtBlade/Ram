@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
-    tools:context="com.example.ram.homepage.ActivityHome"
-    tools:ignore="HardcodedText, ContentDescription">
+    tools:context=".AppointmentPurpose"
+    tools:ignore="HardcodedText, ContentDescription, MissingClass">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_start"
@@ -38,18 +38,17 @@
 
     <ImageView
         android:id="@+id/img_logo"
-        android:layout_width="350dp"
-        android:layout_height="125dp"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
         app:layout_constraintTop_toTopOf="@id/gl_top"
         app:srcCompat="@drawable/phinma_logo" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="735dp"
-        android:layout_height="960dp"
+        android:layout_width="380dp"
+        android:layout_height="620dp"
         android:layout_marginTop="8dp"
         app:cardBackgroundColor="#00FFFFFF"
         app:cardCornerRadius="30dp"
@@ -65,14 +64,14 @@
             android:background="@drawable/alphagradient">
 
             <TextView
-                android:id="@+id/tv_MyApp"
+                android:id="@+id/tv_Purpose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="My Appointments"
-                android:textSize="60sp"
-                android:textColor="@color/black"
+                android:text="Purpose of Visit"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,26 +79,38 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="820dp"
+                android:layout_height="530dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_MyApp"
-                app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/appointmentcard" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_Purpose"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_logout"
+        android:id="@+id/btn_next"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
-        android:text="LOGOUT"
+        android:text="NEXT"
         android:textColor="@color/white"
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintStart_toStartOf="@+id/gl_center"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
+        android:text="RETURN"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gl_center"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
