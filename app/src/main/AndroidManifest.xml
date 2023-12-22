@@ -13,6 +13,9 @@
         android:theme="@style/Theme.RAM"
         tools:targetApi="31">
         <activity
+            android:name=".AppointmentPurpose"
+            android:exported="false" />
+        <activity
             android:name=".ActivityHome"
             android:exported="false" />
         <activity
