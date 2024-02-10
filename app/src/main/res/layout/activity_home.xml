@@ -37,19 +37,29 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="200dp"
+        android:id="@+id/imgUser"
+        android:layout_width="100dp"
         android:layout_height="75dp"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
         app:layout_constraintTop_toTopOf="@id/gl_top"
-        app:srcCompat="@drawable/phinma_logo" />
+        app:srcCompat="@drawable/ic_user" />
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toTopOf="@id/gl_top"
+        app:srcCompat="@drawable/ram" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="380dp"
-        android:layout_height="620dp"
+        android:layout_height="650dp"
         android:layout_marginTop="8dp"
         app:cardBackgroundColor="#00FFFFFF"
         app:cardCornerRadius="30dp"
@@ -79,8 +89,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="530dp"
+                android:layout_height="565dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,12 +103,14 @@
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_bg"
-        android:text="LOGOUT"
+        android:text="Create Appointment"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="23sp"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
