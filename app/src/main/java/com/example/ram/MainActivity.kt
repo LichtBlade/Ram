@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ram.databinding.ActivityMainBinding
+import com.example.ram.helppage.HelpScreen
 import com.example.ram.homepage.ActivityHome
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, ActivityHome::class.java))
                 finish()
             }
+        }
+        binding.tvHelp?.setOnClickListener {
+            startActivity(
+                Intent(this, HelpScreen::class.java)
+            )
         }
     }
 
