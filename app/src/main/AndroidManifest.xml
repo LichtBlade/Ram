@@ -16,7 +16,7 @@
             android:name=".helppage.HelpScreen"
             android:exported="false" />
         <activity
-            android:name=".AppointmentPurpose"
+            android:name=".appointment.AppointmentPurpose"
             android:exported="false" />
         <activity
             android:name=".homepage.ActivityHome"
