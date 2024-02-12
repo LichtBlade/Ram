@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             binding.etPassword?.error = "Please fill up"
             return false
         }
-
         return true
     }
 }
