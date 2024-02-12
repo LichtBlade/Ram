@@ -16,6 +16,7 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
         val title: TextView = itemView.findViewById(R.id.textView_qA)
         val answer: TextView = itemView.findViewById(R.id.textView_answers)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
+        val arrow: TextView = itemView.findViewById(R.id.textView_dropdown)
 
         fun collapseExpandedView(){
             answer.visibility = View.GONE
@@ -37,9 +38,19 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
         val currentItem = mList[position]
         holder.title.text = currentItem.tittle
         holder.answer.text = currentItem.answer
+        holder.arrow.text = currentItem.arrowSign
+
 
         val isExpandable: Boolean = currentItem.isExpandable
-        holder.answer.visibility = if (isExpandable) View.VISIBLE else View.GONE
+        holder.answer.visibility = if (isExpandable){ View.VISIBLE  }else View.GONE
+
+        if (!isExpandable){
+            holder.arrow.text = "V"
+        }else{
+            holder.arrow.text = "A"
+        }
+
+
 
         holder.constraintLayout.setOnClickListener {
             isAnyItemExpanded(position)
