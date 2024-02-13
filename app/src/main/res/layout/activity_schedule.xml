@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_top"
@@ -95,6 +95,8 @@
                 app:layout_constraintHorizontal_bias="0.409"
                 app:layout_constraintStart_toEndOf="@+id/img_logo"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

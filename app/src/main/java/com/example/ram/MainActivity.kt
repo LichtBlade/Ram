@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnEditprofileConfirm.setOnClickListener {
             if(validation()){
-                startActivity(Intent(this, ActivityHome::class.java))
+                startActivity(Intent(this, activity_schedule::class.java))
                 finish()
             }
         }
