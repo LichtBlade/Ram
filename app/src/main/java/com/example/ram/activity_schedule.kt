@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.ram.databinding.ActivityScheduleBinding
@@ -36,23 +37,26 @@ class activity_schedule : AppCompatActivity() {
         spinner.adapter = adapter
     }
 
-    private fun validation(): Boolean {
-        val selectedTime = findViewById<Spinner>(R.id.dropdownSpinner).selectedItem.toString()
-        val calendar = Calendar.getInstance()
-        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-
-        return !(dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) ||
-                !(selectedTime == "10:00 - 11:00 AM" || selectedTime == "1:00 - 2:00 PM")
-    }
 
     private fun nextButton() {
         val nextButton = findViewById<Button>(R.id.btn_next)
 
-        nextButton.setOnClickListener {
-            if (validation()) {
-                Toast.makeText(this, "Validation successful.", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Invalid time selected for Saturday/Sunday", Toast.LENGTH_SHORT).show()
+        val calendarView = findViewById<CalendarView>(R.id.cv_calendar)
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+            val selectedDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+            nextButton.setOnClickListener {
+                if (selectedDayOfWeek == Calendar.SATURDAY || selectedDayOfWeek == Calendar.SUNDAY) {
+                    Toast.makeText(
+                        this,
+                        "Invalid date selected for Saturday/Sunday",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(this, "Validation successful.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
