@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.ram.ApiService
 import com.example.ram.GlobalVariables
 import com.example.ram.databinding.ActivityMainBinding
+import com.example.ram.details.Activity_details
 import com.example.ram.helppage.HelpScreen
 import com.example.ram.homepage.ActivityHome
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.tvHelp?.setOnClickListener {
             startActivity(
-                Intent(this, HelpScreen::class.java)
+                Intent(this, Activity_details::class.java)
             )
         }
     }
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
                             Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
                             val intent = Intent(context, ActivityHome::class.java)
-                            intent.putExtra("creator_id", loginResponse?.userId)
+                            intent.putExtra("creator_id", user_id)
                             context.startActivity(intent)
                             (context as Activity).finish()
                         } else {

@@ -1,11 +1,13 @@
 package com.example.ram.appointment
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.R
+import com.example.ram.activity_schedule
 import com.example.ram.databinding.ActivityAppointmentPurposeBinding
 
 
@@ -15,8 +17,9 @@ class AppointmentPurpose : AppCompatActivity() {
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var newArrayList: ArrayList<DataOfPurposeCard>
 
+    private val selectedPurposeDetails = mutableListOf<DataOfPurposeCard>() // Define selectedPurposeDetails here
+
     lateinit var purposeAppointment: Array<String>
-    lateinit var isSelected: BooleanArray
     lateinit var requirements: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,9 +95,25 @@ class AppointmentPurpose : AppCompatActivity() {
 
         // Call getUserData() to populate the RecyclerView with data
         getUserData()
+
+        binding.btnNext.setOnClickListener {
+            if (selectedPurposeDetails.isEmpty()) {
+                Toast.makeText(this, "You need to select at least one purpose.", Toast.LENGTH_SHORT).show()
+            } else {
+                val purposesString = selectedPurposeDetails.joinToString(", ") { it.purpose.toString() }
+                val requirementsString = selectedPurposeDetails.joinToString(", ") { it.requirements.toString() }
+//                val paymentInfoString = selectedPurposeDetails.joinToString(", ") { it.paymentInfo }.toString()
+
+                val intent = Intent(this, activity_schedule::class.java)
+                intent.putExtra("selectedPurposes", purposesString)
+                intent.putExtra("requirements", requirementsString)
+//                intent.putExtra("paymentInfo", paymentInfoString)
+                intent.putExtra("creator_id", creatorId)
+                startActivity(intent)
+            }
+        }
     }
 
-    // In AppointmentPurpose class
     // In AppointmentPurpose class
     private fun getUserData() {
         for (i in purposeAppointment.indices) {
@@ -109,9 +128,9 @@ class AppointmentPurpose : AppCompatActivity() {
             // Handle purpose selection here if needed
             // For example, you can show a Toast message with the selected purpose
             Toast.makeText(this, "Selected purpose: $selectedPurpose", Toast.LENGTH_SHORT).show()
+            selectedPurposeDetails.clear()
+            selectedPurposeDetails.addAll(newArrayList.filter { it.isSelected })
         }
     }
-
-
-
 }
+

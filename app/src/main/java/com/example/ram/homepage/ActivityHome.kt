@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,8 +54,10 @@ class ActivityHome : AppCompatActivity() {
 
         val creatorId = intent.getStringExtra("creator_id")
 
+
         binding.btnCreateAppointment.setOnClickListener {
             val intent = Intent(this, AppointmentPurpose::class.java)
+            Toast.makeText(this,"$creatorId",Toast.LENGTH_SHORT).show()
             intent.putExtra("creator_id", creatorId)
             startActivity(intent)
         }

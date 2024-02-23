@@ -20,7 +20,7 @@
             android:name=".activity_reference"
             android:exported="false" />
         <activity
-            android:name=".activity_details"
+            android:name=".details.Activity_details"
             android:exported="false" />
         <activity
             android:name=".activity_schedule"

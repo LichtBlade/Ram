@@ -1,6 +1,5 @@
-package com.example.ramproject
+package com.example.ram
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -14,14 +13,11 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.example.ram.R
-import com.example.ram.activity_details
+import androidx.cardview.widget.CardView
 import com.example.ram.databinding.ActivityScheduleBinding
+import com.example.ram.details.Activity_details
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 class activity_schedule : AppCompatActivity() {
     private lateinit var binding: ActivityScheduleBinding
@@ -34,16 +30,16 @@ class activity_schedule : AppCompatActivity() {
     private val format = SimpleDateFormat("h:mm a", Locale.US)
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val creatorId = intent.getStringExtra("creator_id")
+        val selectedPurposes = intent.getStringExtra("selectedPurposes")
+        val requirements = intent.getStringExtra("requirements")
 
-        val spinner: Spinner = findViewById(R.id.dropdownSpinner)
+        val spinner: Spinner = binding.dropdownSpinner
         val items = arrayOf(
             "08:00 AM",
             "09:00 AM",
@@ -54,28 +50,21 @@ class activity_schedule : AppCompatActivity() {
             "03:00 PM"
         )
 
-        val calendarView = findViewById<CalendarView>(R.id.cv_calendar)
-        userSelectedDate = calendarView.date
+        val calendarView = binding.cvCalendar
 
-        val calendar = Calendar.getInstance()
+        // Set initial userSelectedDate to current date
         val currentDate = Calendar.getInstance().timeInMillis
         userSelectedDate = currentDate
-
         calendarView.minDate = currentDate
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = Calendar.getInstance()
             selectedDate.set(year, month, dayOfMonth)
-            userSelectedDate = selectedDate.timeInMillis
+            userSelectedDate = selectedDate.timeInMillis // Update userSelectedDate to the selected date
 
             val dayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK)
-            // Disable Saturday
-            if (dayOfWeek == Calendar.SATURDAY) {
-                calendarView.date = currentDate
-                Toast.makeText(this, "We don't have transactions on weekends.", Toast.LENGTH_SHORT)
-                    .show()
-            }
-            if (dayOfWeek == Calendar.SUNDAY) {
+            // Disable Saturday and Sunday
+            if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
                 calendarView.date = currentDate
                 Toast.makeText(this, "We don't have transactions on weekends.", Toast.LENGTH_SHORT)
                     .show()
@@ -87,22 +76,18 @@ class activity_schedule : AppCompatActivity() {
             }.toSet()
 
             (spinner.adapter as CustomArrayAdapter).setFullyBookedTimeSlots(fullyBookedTimeSlots)
-
         }
 
         val adapter = CustomArrayAdapter(this, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        nextButton = findViewById(R.id.btn_next)
+        nextButton = binding.btnNext
 
-        val selectedPurposes = intent.getStringExtra("selectedPurposes")
-        val requirements = intent.getStringExtra("requirements")
-        val paymentInfo = intent.getStringExtra("paymentInfo")
 
         nextButton.setOnClickListener {
 
-            val selectedStartTime = findViewById<Spinner>(R.id.dropdownSpinner).selectedItem.toString()
+            val selectedStartTime = spinner.selectedItem.toString()
             val selectedDate = Date(userSelectedDate)
             val selectedDateString = dateFormat.format(selectedDate)
             val selectedTimeSlot = "$selectedDateString-$selectedStartTime"
@@ -139,10 +124,10 @@ class activity_schedule : AppCompatActivity() {
                 calendar.add(Calendar.HOUR, 1)
                 val selectedEndTime = format.format(calendar.time)
 
-                val intent = Intent(this, activity_details::class.java)
+                val intent = Intent(this, Activity_details::class.java)
                 intent.putExtra("selectedPurposes", selectedPurposes)
                 intent.putExtra("requirements", requirements)
-                intent.putExtra("paymentInfo", paymentInfo)
+                intent.putExtra("paymentInfo", "paymentInfo")
                 intent.putExtra("selectedDate", userSelectedDate)
                 intent.putExtra("selectedStartTime", selectedStartTime)
                 intent.putExtra("selectedEndTime", selectedEndTime)
