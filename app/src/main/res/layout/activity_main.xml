@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg1"
     android:textAlignment="center"
-    tools:context=".MainActivity"
+    tools:context=".login.MainActivity"
     tools:ignore="HardcodedText, ContentDescription">
 
     <!--nakadepende sa image size yung dimensionratio   -->

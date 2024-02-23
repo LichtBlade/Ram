@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.ram.databinding.ActivitySplashBinding
+import com.example.ram.login.MainActivity
 
 class Splash : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
