@@ -1,8 +1,8 @@
 package com.example.ram.appointment
 
 data class DataOfPurposeCard(
-    val purpose: String?=null,
-    val isSelected: Boolean?= null,
-    val requirements: String?= null,
+    var purpose: String?=null,
+    var isSelected: Boolean = false, // when radiobutton is click/selected
+    var requirements: String?= null,
     var isExpandable: Boolean = false
 )

@@ -1,5 +1,6 @@
 package com.example.ram.homepage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,8 +10,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.R
+import com.example.ram.ScheduleApiService
+import com.example.ram.appointment.AppointmentPurpose
 import com.example.ram.databinding.ActivityHomeBinding
 import com.google.android.material.navigation.NavigationView
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ActivityHome : AppCompatActivity() {
     // For Binding
@@ -44,6 +49,21 @@ class ActivityHome : AppCompatActivity() {
         ImageUser.setOnClickListener {
             Drawer_Layout.openDrawer(Navigation_View)
         }
+
+
+        val creatorId = intent.getStringExtra("creator_id")
+
+        binding.btnCreateAppointment.setOnClickListener {
+            val intent = Intent(this, AppointmentPurpose::class.java)
+            intent.putExtra("creator_id", creatorId)
+            startActivity(intent)
+        }
+
+
+
+
+
+
 
         Drawer_Layout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerOpened(drawerView: View) {
@@ -128,6 +148,21 @@ class ActivityHome : AppCompatActivity() {
         }
         newRecyclerView.adapter = MyAdapter(newArrayList)
     }
+
+
+    // FETCHING
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("http://rammanager-001-site1.btempurl.com/RAM/Homepage/assets/script/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val scheduleApiService = retrofit.create(ScheduleApiService::class.java)
+
+
+
+
+
 
 
 
