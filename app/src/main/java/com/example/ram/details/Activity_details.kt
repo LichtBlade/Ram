@@ -1,7 +1,6 @@
 package com.example.ram.details
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,22 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ram.ApiService
-import com.example.ram.GlobalVariables
-import com.example.ram.R
-import com.example.ram.activity_reference
 import com.example.ram.databinding.ActivityDetailsBinding
-import com.example.ram.homepage.ActivityHome
+import com.example.ram.reference.Activity_reference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.lang.StringBuilder
 
 class Activity_details : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
@@ -94,38 +85,16 @@ class Activity_details : AppCompatActivity() {
         fetchUserDetails(creatorId.toString(), this)
 
         binding.btnNext.setOnClickListener {
-            val intent = Intent(this, activity_reference::class.java)
+            val intent = Intent(this, Activity_reference::class.java)
+            intent.putExtra("selectedPurposes", selectedPurposes)
+            intent.putExtra("requirements", requirements)
+            intent.putExtra("selectedDate", selectedDate)
+            intent.putExtra("selectedStartTime", selectedStartTime)
+            intent.putExtra("selectedEndTime", selectedEndTime)
             intent.putExtra("creator_id", creatorId)
             startActivity(intent)
         }
     }
-
-//    private fun getMyData() {
-//        val creatorId = intent.getStringExtra("creator_id")
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl("http://10.0.2.2:8000/api/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//            .create(ApiService::class.java)
-//
-//        val call = retrofit.fetchCreatorDetails()
-//        call.enqueue(object : Callback<List<DetailsClass>?> {
-//            override fun onResponse(
-//                call: Call<List<DetailsClass>?>,
-//                response: Response<List<DetailsClass>?>
-//            ) {
-//                val reponseBody = response.body()
-//                val info = StringBuilder()
-//
-//                binding.tvUseremail.text = info.append()
-//            }
-//
-//            override fun onFailure(call: Call<List<DetailsClass>?>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//    }
-
 
 
 
@@ -173,41 +142,6 @@ class Activity_details : AppCompatActivity() {
 
 }
 
-
-//    @SuppressLint("SetTextI18n")
-//    private fun fetchCreatorDetails(creatorId: String?) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val response = RetrofitClient.apiService.fetchCreatorDetails(creatorId ?: "")
-//                if (response.isSuccessful) {
-//                    val user = response.body()
-//                    if (user != null) {
-//                        val creatorFirstName = user.firstName
-//                        val creatorLastName = user.lastName
-//                        val creatorDetails = user.emailAddress
-//
-//                        withContext(Dispatchers.Main) {
-//                            binding.tvUsername.text = "$creatorFirstName $creatorLastName"
-//                            binding.tvemail.text = creatorDetails
-//                        }
-//                    } else {
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(this@Activity_details, "Error: User data is null", Toast.LENGTH_LONG).show()
-//                        }
-//                    }
-//                } else {
-//                    withContext(Dispatchers.Main) {
-//                        Toast.makeText(this@Activity_details, "Error: ${response.message()}", Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                withContext(Dispatchers.Main) {
-//                    e.printStackTrace()
-//                    Toast.makeText(this@Activity_details, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        }
-//    }
 
 
 

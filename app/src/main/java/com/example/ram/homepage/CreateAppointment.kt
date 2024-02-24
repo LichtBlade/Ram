@@ -8,6 +8,5 @@ class CreateAppointment (
     @SerializedName("scheduled_date") val  schedule_date: String,
     @SerializedName("start_time") val schedule_Time: String,
     @SerializedName("end_time") val end_time: String,
-    @SerializedName("purpose") val api_purpose: String,
-    @SerializedName("status") val status: String
+    @SerializedName("purpose") val api_purpose: String
 )

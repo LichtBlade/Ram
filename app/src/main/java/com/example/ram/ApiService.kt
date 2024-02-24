@@ -1,6 +1,7 @@
 package com.example.ram
 
 import com.example.ram.details.DetailsClass
+import com.example.ram.homepage.AppointmentResponse
 import com.example.ram.homepage.CreateAppointment
 import com.example.ram.login.LoginResponse
 import com.google.gson.JsonObject
@@ -11,6 +12,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
+import retrofit2.http.DELETE
 import retrofit2.http.Query
 
 interface ApiService {
@@ -24,7 +26,7 @@ interface ApiService {
 
     // For Creating Schedules
     @FormUrlEncoded
-    @POST("/schedules/create")
+    @POST("schedules/create")
     suspend fun createAppointment(
         @Field("creator_id") CreatorId: String,
         @Field("reference_id")  referenceId: String,
@@ -41,6 +43,10 @@ interface ApiService {
     fun fetchUserDetails(@Query("user_id") userId: String): Call<DetailsClass>
 
 
+    @GET("appointment/created")
+    fun getAppointmentsForCreatorId(@Query("creator_id") creatorId: String): Call<AppointmentResponse>
+
+
 
     // FOR DETAILS POST
     @FormUrlEncoded
@@ -52,4 +58,12 @@ interface ApiService {
         @Field("end_time") selectedEndTime: Any,
         @Field("purpose") selectedPurposes: String
     ): Response<String>
+
+
+    @FormUrlEncoded
+    @DELETE("schedyles/delete")
+    fun deleteSchedule(
+        @Field("creator_id") creatorId: String,
+        @Field("reference_id") referenceId: String
+    ): Call<Void>
 }

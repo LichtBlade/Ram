@@ -3,17 +3,20 @@ package com.example.ram.homepage
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.R
+import com.example.ram.appointment.DataOfAppointmentCard
 
-class MyAdapter(private val appointmentList : ArrayList<DataOfAppointmentCard>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
+class MyAdapter(private val appointmentList: ArrayList<DataOfAppointmentCard>) :
+    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
             R.layout.appointmentcard,
-            parent,false)
+            parent, false
+        )
         return MyViewHolder(itemView)
     }
 
@@ -23,21 +26,23 @@ class MyAdapter(private val appointmentList : ArrayList<DataOfAppointmentCard>) 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = appointmentList[position]
-        holder.referenceId.text = currentItem.referenceId
+        holder.referenceId.text = currentItem.referenceId.toString()
         holder.scheduleDate.text = currentItem.scheduleDate
         holder.scheduleTime.text = currentItem.scheduleTime
         holder.purpose.text = currentItem.purpose
         holder.status.text = currentItem.status
     }
 
-    class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val referenceId : TextView = itemView.findViewById(R.id.tvMyRefID)
-        val scheduleDate : TextView = itemView.findViewById(R.id.tvMyDate)
-        val scheduleTime : TextView = itemView.findViewById(R.id.tvMyTime)
-        val purpose : TextView = itemView.findViewById(R.id.tvMyPurpose)
-        val status : TextView = itemView.findViewById(R.id.tvMyStatus)
+        val referenceId: TextView = itemView.findViewById(R.id.tvMyRefID)
+        val scheduleDate: TextView = itemView.findViewById(R.id.tvMyDate)
+        val scheduleTime: TextView = itemView.findViewById(R.id.tvMyTime)
+        val purpose: TextView = itemView.findViewById(R.id.tvMyPurpose)
+        val status: TextView = itemView.findViewById(R.id.tvMyStatus)
 
-
+        // Initialize ImageButton views
+        val editButton: ImageButton = itemView.findViewById(R.id.imgEdit)
+        val deleteButton: ImageButton = itemView.findViewById(R.id.imgDelete)
     }
 }
