@@ -3,6 +3,7 @@ package com.example.ram.appointment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
@@ -20,19 +21,19 @@ class PurposeAdapter(
     inner class PurposeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val purposeOfVisit: TextView = itemView.findViewById(R.id.tv_purposecard)
         val requirement: TextView = itemView.findViewById(R.id.tv_requirements)
-        val radioButton: RadioButton = itemView.findViewById(R.id.radioButton)
+        val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
 
         init {
-            radioButton.setOnClickListener {
+            checkBox.setOnClickListener {
                 val data = purpose[adapterPosition]
-                if (radioButton.isChecked) {
+                if (checkBox.isChecked) {
                     if (selectedCount < 2) {
                         selectedCount++
                         data.isSelected = true
                         onPurposeSelectedListener.invoke(data.purpose ?: "")
                     } else {
-                        radioButton.isChecked = false
+                        checkBox.isChecked = false
                         Toast.makeText(
                             itemView.context,
                             "You can only select up to 2 purposes",
@@ -52,7 +53,7 @@ class PurposeAdapter(
         fun bind(data: DataOfPurposeCard) {
             purposeOfVisit.text = data.purpose
             requirement.text = data.requirements
-            radioButton.isChecked = data.isSelected
+            checkBox.isChecked = data.isSelected
         }
 
         fun collapseExpandedView() {

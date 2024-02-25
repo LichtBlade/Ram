@@ -5,9 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toast.*
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ram.ApiService
+import com.example.ram.GlobalVariables
 import com.example.ram.R
 import com.example.ram.appointment.DataOfAppointmentCard
+import com.example.ram.details.RetrofitClient.apiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MyAdapter(private val appointmentList: ArrayList<DataOfAppointmentCard>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
@@ -31,6 +41,42 @@ class MyAdapter(private val appointmentList: ArrayList<DataOfAppointmentCard>) :
         holder.scheduleTime.text = currentItem.scheduleTime
         holder.purpose.text = currentItem.purpose
         holder.status.text = currentItem.status
+
+        holder.deleteButton.setOnClickListener{
+            val referenceId = currentItem.referenceId // Get the reference ID of the appointment to delete
+            deleteAppointment(referenceId.toString(), position)
+        }
+        holder.editButton.setOnClickListener {
+
+        }
+
+    }
+
+    private fun deleteAppointment(referenceId: String, position: Int) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8000/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+        val requestCall: Call<Void> = apiService.deleteSchedule(referenceId)
+
+        requestCall.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    // Appointment deleted successfully, remove from the list and update UI
+                    appointmentList.removeAt(position)
+                    notifyDataSetChanged()
+                } else {
+                    // Handle unsuccessful deletion response
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // Handle failure here
+                t.printStackTrace()
+            }
+        })
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

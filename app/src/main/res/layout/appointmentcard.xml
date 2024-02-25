@@ -8,7 +8,7 @@
     android:layout_marginVertical="10dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="8dp"
-    tools:ignore="HardcodedText, ContentDescription" >
+    tools:ignore="HardcodedText, ContentDescription, SpeakableTextPresentCheck">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -113,12 +113,11 @@
 
         <TextView
             android:id="@+id/tvMyRefID"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="tvMyRefID"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvMyDate"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -126,12 +125,11 @@
 
         <TextView
             android:id="@+id/tvMyDate"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="tvMyDate"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvMyTime"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -139,12 +137,11 @@
 
         <TextView
             android:id="@+id/tvMyTime"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="tvMyTime"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvMyPurpose"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -152,20 +149,20 @@
 
         <TextView
             android:id="@+id/tvMyPurpose"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="74dp"
             android:fontFamily="@font/poppins"
             android:text="tvMyPurpose"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvMyStatus"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintEnd_toStartOf="@+id/imgDelete"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/tvMyTime" />
 
         <TextView
             android:id="@+id/tvMyStatus"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="tvMyStatus"

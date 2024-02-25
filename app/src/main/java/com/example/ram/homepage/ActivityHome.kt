@@ -1,8 +1,10 @@
 package com.example.ram.homepage
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -16,7 +18,11 @@ import com.example.ram.R
 import com.example.ram.appointment.AppointmentPurpose
 import com.example.ram.appointment.DataOfAppointmentCard
 import com.example.ram.databinding.ActivityHomeBinding
+import com.example.ram.databinding.ActivityMainBinding
+import com.example.ram.helppage.HelpScreen
+import com.example.ram.login.MainActivity
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,6 +51,9 @@ class ActivityHome : AppCompatActivity() {
         ImageUser = findViewById(R.id.imgUser)
         Navigation_View = findViewById(R.id.navigation_view)
         Drawer_Layout = findViewById(R.id.drawer_layout)
+        Navigation_View.setNavigationItemSelectedListener { menuItem ->
+            setNavigationItemSelectedListener(menuItem)
+        }
 
         ImageUser.setOnClickListener {
             Drawer_Layout.openDrawer(Navigation_View)
@@ -162,11 +171,7 @@ class ActivityHome : AppCompatActivity() {
         }
     }
 
-
-
-
-
-
+    // Set a listener for the DrawerLayout to close the drawer when tapped outside
     override fun onBackPressed() {
         // Check if the drawer is open, if so, close it on back press
         if (Drawer_Layout.isDrawerOpen(GravityCompat.START)) {
@@ -174,6 +179,32 @@ class ActivityHome : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+    private fun setNavigationItemSelectedListener(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_help -> {
+                val intent = Intent(this, HelpScreen::class.java)
+                startActivity(intent)
+            }
+        }
+        when (item.itemId){
+            R.id.nav_logout -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Logout")
+                builder.setMessage("Are you sure you want to logout?")
+                builder.setPositiveButton("Yes") { dialogInterface, _ ->
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                builder.setNegativeButton("No") { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
