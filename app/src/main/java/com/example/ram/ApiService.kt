@@ -65,7 +65,7 @@ interface ApiService {
 
     // FOR DELETING APPOINTMENT
     @FormUrlEncoded
-    @POST("schedules/delete") //<= may typo sa vscode
+    @POST("schedules/delete")
     fun deleteSchedule(
         @Field("reference_id") referenceId: String
     ): Call<Void>

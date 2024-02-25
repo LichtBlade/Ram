@@ -46,6 +46,9 @@ class MyAdapter(private val appointmentList: ArrayList<DataOfAppointmentCard>) :
             val referenceId = currentItem.referenceId // Get the reference ID of the appointment to delete
             deleteAppointment(referenceId.toString(), position)
         }
+        holder.editButton.setOnClickListener {
+
+        }
 
     }
 
