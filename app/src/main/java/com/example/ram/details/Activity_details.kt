@@ -56,7 +56,10 @@ class Activity_details : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+//return button
+        binding.btnReturn.setOnClickListener{
+            onBackPressed()
+        }
         // Retrieve creator ID
         val creatorId = intent.getStringExtra("creator_id")
 
