@@ -3,6 +3,7 @@ package com.example.ram.appointment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -127,10 +128,16 @@ class AppointmentPurpose : AppCompatActivity() {
         newRecyclerView.adapter = PurposeAdapter(newArrayList) { selectedPurpose ->
             // Handle purpose selection here if needed
             // For example, you can show a Toast message with the selected purpose
-            Toast.makeText(this, "Selected purpose: $selectedPurpose", Toast.LENGTH_SHORT).show()
             selectedPurposeDetails.clear()
             selectedPurposeDetails.addAll(newArrayList.filter { it.isSelected })
         }
+
+    //return button
+        binding.btnReturn.setOnClickListener{
+            onBackPressed()
+        }
+
+
     }
 }
 

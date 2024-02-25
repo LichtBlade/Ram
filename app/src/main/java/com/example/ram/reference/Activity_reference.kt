@@ -48,7 +48,7 @@ class Activity_reference : AppCompatActivity() {
         val startTime = selectedStartTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "")
         val endTime = selectedEndTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "").padStart(5, '0')
 
-        Toast.makeText(this,"$endTime + $startTime",Toast.LENGTH_SHORT).show()
+
 
         val start = Random.nextInt(1, 101)
         val count = Random.nextInt(1, 11)
@@ -70,7 +70,7 @@ class Activity_reference : AppCompatActivity() {
             try {
                 val response = scheduleApiService.sendScheduleData(requestBody)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@Activity_reference, "SHEESHHHH", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Activity_reference, "Appointment created", Toast.LENGTH_SHORT).show()
 //                    startActivity(Intent(this@Activity_reference, ActivityHome::class.java))
                     val intent = Intent(this@Activity_reference, ActivityHome::class.java)
                     intent.putExtra("creator_id", creatorId)

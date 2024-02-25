@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         val apiService = retrofit.create(ApiService::class.java)
 
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = apiService.login(user_id, password)
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                             GlobalVariables.userID = loginResponse?.userId
                             GlobalVariables.loginTime = loginResponse?.loginTime
 
-                            Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
+
                             val intent = Intent(context, ActivityHome::class.java)
                             intent.putExtra("creator_id", user_id)
                             context.startActivity(intent)

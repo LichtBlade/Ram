@@ -14,7 +14,8 @@
         android:layout_height="50dp"
         android:background="@drawable/button_bg"
         android:fontFamily="@font/poppins"
-        android:text="Home"
+        android:text="Done"
+        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -95,12 +96,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="378dp"
+                android:layout_width="330dp"
                 android:layout_height="180dp"
                 android:layout_marginTop="129dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_logo" >
+                app:layout_constraintTop_toBottomOf="@+id/img_logo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="12dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -142,21 +145,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btn_return"
-        android:layout_width="120dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/button_bg"
-        android:fontFamily="@font/poppins"
-        android:text="Return"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toStartOf="@+id/gl_center"
-        app:layout_constraintHorizontal_bias="0.185"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toTopOf="@+id/gl_top"
-        tools:ignore="TouchTargetSizeCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
