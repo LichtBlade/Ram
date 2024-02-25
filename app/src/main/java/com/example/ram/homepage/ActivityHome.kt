@@ -1,11 +1,14 @@
 package com.example.ram.homepage
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -17,6 +20,10 @@ import com.example.ram.appointment.AppointmentPurpose
 import com.example.ram.appointment.DataOfAppointmentCard
 import com.example.ram.databinding.ActivityHomeBinding
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -90,6 +97,7 @@ class ActivityHome : AppCompatActivity() {
         // Fetch data from API
         if(creatorId != null) {
             fetchDataFromAPI(creatorId)
+            fetchUserDetails(creatorId,this@ActivityHome)
         }
     }
 
@@ -180,6 +188,45 @@ class ActivityHome : AppCompatActivity() {
     }
 
 
+
+    @SuppressLint("SetTextI18n")
+    private fun fetchUserDetails(userId: String, context: Context) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://64.23.183.4/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val apiService: ApiService = retrofit.create(ApiService::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = apiService.fetchUserDetails(userId).execute()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val navEmailTextView = Navigation_View.findViewById<TextView>(R.id.nav_email)
+                        val navFullName = Navigation_View.findViewById<TextView>(R.id.nav_name)
+
+                        val userDetails = response.body()
+                        userDetails?.let {
+                            // Process the user details
+                            val firstName = it.firstName
+                            val lastName = it.lastName
+                            val emailAddress = it.emailAddress
+                            navEmailTextView.text = emailAddress
+                            navFullName.text = "$firstName $lastName"
+                        }
+                    } else {
+                        Toast.makeText(context, "Failed to fetch user details", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("MainActivity", "Error: ${e.message}", e)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
 
 
 

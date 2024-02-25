@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.tvHelp?.setOnClickListener {
             startActivity(
-                Intent(this, Activity_details::class.java)
+                Intent(this, HelpScreen::class.java)
             )
         }
     }
