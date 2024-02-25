@@ -3,17 +3,23 @@ package com.example.ram.homepage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ram.ApiService
 import com.example.ram.R
-import com.example.ram.ScheduleApiService
 import com.example.ram.appointment.AppointmentPurpose
+import com.example.ram.appointment.DataOfAppointmentCard
 import com.example.ram.databinding.ActivityHomeBinding
 import com.google.android.material.navigation.NavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -21,18 +27,12 @@ class ActivityHome : AppCompatActivity() {
     // For Binding
     private lateinit var binding: ActivityHomeBinding
 
-    //for RecyclerView
+    // For RecyclerView
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var newArrayList: ArrayList<DataOfAppointmentCard>
+    private lateinit var myAdapter: MyAdapter
 
-    // Array for sample
-    lateinit var referenceId : Array<String>
-    lateinit var scheduleDate : Array<String>
-    lateinit var scheduleTime : Array<String>
-    lateinit var purpose : Array<String>
-    lateinit var status : Array<String>
-
-    //drawer nav
+    // For drawer navigation
     private lateinit var ImageUser: ImageView
     private lateinit var Navigation_View: NavigationView
     private lateinit var Drawer_Layout: DrawerLayout
@@ -50,20 +50,13 @@ class ActivityHome : AppCompatActivity() {
             Drawer_Layout.openDrawer(Navigation_View)
         }
 
-
         val creatorId = intent.getStringExtra("creator_id")
 
         binding.btnCreateAppointment.setOnClickListener {
             val intent = Intent(this, AppointmentPurpose::class.java)
             intent.putExtra("creator_id", creatorId)
-            startActivity(intent)
+            startActivityForResult(intent, CREATE_APPOINTMENT_REQUEST_CODE)
         }
-
-
-
-
-
-
 
         Drawer_Layout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerOpened(drawerView: View) {
@@ -87,45 +80,92 @@ class ActivityHome : AppCompatActivity() {
             }
         })
 
-        referenceId = arrayOf(
-            "1",
-            "2",
-            "3"
-        )
-
-        scheduleDate = arrayOf(
-            "March 23",
-            "September 6",
-            "January 2"
-        )
-
-        scheduleTime = arrayOf(
-            "11:11",
-            "10:10",
-            "9:09"
-        )
-
-        purpose = arrayOf(
-            "Grades",
-            "Card",
-            "Id"
-        )
-
-        status = arrayOf(
-            "ready",
-            "secret",
-            "not yet"
-        )
-
-        newRecyclerView=findViewById(R.id.recyclerView)
+        // Initialize RecyclerView and Adapter
+        newRecyclerView = findViewById(R.id.recyclerView)
         newRecyclerView.layoutManager = LinearLayoutManager(this)
-        newRecyclerView.setHasFixedSize(true)
+        newArrayList = ArrayList()
+        myAdapter = MyAdapter(newArrayList)
+        newRecyclerView.adapter = myAdapter
 
-        newArrayList = arrayListOf<DataOfAppointmentCard>()
-        getUserData()
+        // Fetch data from API
+        if(creatorId != null) {
+            fetchDataFromAPI(creatorId)
+        }
     }
 
-    // Set a listener for the DrawerLayout to close the drawer when tapped outside
+    private fun fetchDataFromAPI(creatorId: String?) {
+        if (creatorId.isNullOrEmpty()) {
+            Log.e("API Error", "Creator ID is null or empty")
+            return
+        }
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://64.23.183.4/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+        val call = apiService.getAppointmentsForCreatorId(creatorId)
+
+        call.enqueue(object : Callback<AppointmentResponse> {
+            override fun onResponse(call: Call<AppointmentResponse>, response: Response<AppointmentResponse>) {
+                if (response.isSuccessful) {
+                    val appointmentsResponse = response.body()
+                    appointmentsResponse?.let {
+                        val appointments = it.appointments
+                        // Update UI with fetched appointments data
+                        updateRecyclerView(appointments)
+                    }
+                } else {
+                    // Handle unsuccessful response
+                    Log.e("API Error", "Failed to fetch appointments: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<AppointmentResponse>, t: Throwable) {
+                // Handle failure
+                Log.e("API Error", "Failed to fetch appointments", t)
+            }
+        })
+    }
+
+    // Function to update RecyclerView with new data
+    private fun updateRecyclerView(appointments: List<Appointment>) {
+        newArrayList.clear() // Clear existing data
+        if (appointments.isNotEmpty()) {
+            newArrayList.addAll(appointments.map { appointment ->
+                DataOfAppointmentCard(
+                    appointment.referenceId,
+                    appointment.scheduledDate,
+                    "${appointment.startTime}",
+                    appointment.purpose,
+                    appointment.status
+                )
+            })
+            myAdapter.notifyDataSetChanged() // Notify adapter of dataset change
+        } else {
+            // Handle case where appointments list is empty
+            // For example, show a message indicating no appointments
+        }
+    }
+
+    // Override onActivityResult to handle result from appointment creation
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_APPOINTMENT_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Appointment created successfully, fetch updated data
+            val creatorId = data?.getStringExtra("creator_id")
+            if (creatorId != null) {
+                fetchDataFromAPI(creatorId)
+            }
+        }
+    }
+
+
+
+
+
+
     override fun onBackPressed() {
         // Check if the drawer is open, if so, close it on back press
         if (Drawer_Layout.isDrawerOpen(GravityCompat.START)) {
@@ -135,31 +175,9 @@ class ActivityHome : AppCompatActivity() {
         }
     }
 
-    private fun getUserData() {
-        for (i in referenceId.indices) {
-            val dataOfAppointmentCard = DataOfAppointmentCard(
-                referenceId[i],
-                scheduleDate[i],
-                scheduleTime[i],
-                purpose[i],
-                status[i]
-            )
-            newArrayList.add(dataOfAppointmentCard)
-        }
-        newRecyclerView.adapter = MyAdapter(newArrayList)
+    companion object {
+        private const val CREATE_APPOINTMENT_REQUEST_CODE = 100
     }
-
-
-    // FETCHING
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://rammanager-001-site1.btempurl.com/RAM/Homepage/assets/script/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val scheduleApiService = retrofit.create(ScheduleApiService::class.java)
-
-
 
 
 

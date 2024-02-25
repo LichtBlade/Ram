@@ -1,8 +1,9 @@
-package com.example.ram.homepage
+package com.example.ram.appointment
 
 data class DataOfAppointmentCard(
-    val referenceId: String? = null,
-    val scheduleDate: String? = null,
-    val scheduleTime: String? = null,
-    val purpose: String? = null,
-    val status: String?=null)
+    val referenceId: Comparable<*>,
+    val scheduleDate: String,
+    val scheduleTime: String,
+    val purpose: String,
+    val status: String
+)

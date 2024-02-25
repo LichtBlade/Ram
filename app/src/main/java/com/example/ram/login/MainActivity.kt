@@ -10,8 +10,10 @@ import android.widget.Toast
 import com.example.ram.ApiService
 import com.example.ram.GlobalVariables
 import com.example.ram.databinding.ActivityMainBinding
+import com.example.ram.details.Activity_details
 import com.example.ram.helppage.HelpScreen
 import com.example.ram.homepage.ActivityHome
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.tvHelp?.setOnClickListener {
             startActivity(
-                Intent(this, HelpScreen::class.java)
+                Intent(this, Activity_details::class.java)
             )
         }
     }
@@ -41,12 +43,15 @@ class MainActivity : AppCompatActivity() {
         val user_id = binding.etStudentID.text.toString()
         val password = binding.etPassword.text.toString()
 
+        val gson = GsonBuilder().setLenient().create()
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/api/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://64.23.183.4/api/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
         val apiService = retrofit.create(ApiService::class.java)
+
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -59,9 +64,9 @@ class MainActivity : AppCompatActivity() {
                             GlobalVariables.userID = loginResponse?.userId
                             GlobalVariables.loginTime = loginResponse?.loginTime
 
-                            Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
+
                             val intent = Intent(context, ActivityHome::class.java)
-                            intent.putExtra("creator_id", loginResponse?.userId)
+                            intent.putExtra("creator_id", user_id)
                             context.startActivity(intent)
                             (context as Activity).finish()
                         } else {
