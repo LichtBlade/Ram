@@ -54,7 +54,7 @@ class MyAdapter(private val appointmentList: ArrayList<DataOfAppointmentCard>) :
 
     private fun deleteAppointment(referenceId: String, position: Int) {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/api/")
+            .baseUrl("http://64.23.183.4/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

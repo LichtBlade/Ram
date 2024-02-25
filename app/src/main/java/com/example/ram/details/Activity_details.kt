@@ -39,7 +39,7 @@ class Activity_details : AppCompatActivity() {
     private lateinit var paymentTextView: TextView
     private lateinit var dateTextView: TextView
     private lateinit var timeTextView: TextView
-    val BASE_URL = "http://10.0.2.2:8000/api/"
+    val BASE_URL = "http://64.23.183.4/api/"
     fun getColoredSpannable(text: String, color: Int): SpannableString {
         val spannable = SpannableString(text)
         spannable.setSpan(
@@ -56,7 +56,8 @@ class Activity_details : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//return button
+
+        //return button
         binding.btnReturn.setOnClickListener{
             onBackPressed()
         }
@@ -80,6 +81,7 @@ class Activity_details : AppCompatActivity() {
 
         // Set text to TextViews
         purposeTextView.text = selectedPurposes
+
         dateTextView.text = selectedDate.toString()
         timeTextView.text = "$selectedStartTime - $selectedEndTime"
         reqTextView.text = requirements
@@ -104,7 +106,7 @@ class Activity_details : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun fetchUserDetails(userId: String, context: Context) {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/api/")
+            .baseUrl("http://64.23.183.4/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiService: ApiService = retrofit.create(ApiService::class.java)

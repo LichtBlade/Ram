@@ -27,7 +27,7 @@ class Activity_reference : AppCompatActivity() {
     private val CREATE_APPOINTMENT_REQUEST_CODE = 100
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8000/api/")
+        .baseUrl("http://64.23.183.4/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -47,7 +47,6 @@ class Activity_reference : AppCompatActivity() {
 
         val startTime = selectedStartTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "")
         val endTime = selectedEndTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "").padStart(5, '0')
-
 
 
         val start = Random.nextInt(1, 101)
@@ -70,12 +69,13 @@ class Activity_reference : AppCompatActivity() {
             try {
                 val response = scheduleApiService.sendScheduleData(requestBody)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@Activity_reference, "Appointment created", Toast.LENGTH_SHORT).show()
-//                    startActivity(Intent(this@Activity_reference, ActivityHome::class.java))
+                    Toast.makeText(this@Activity_reference, "Created", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@Activity_reference, ActivityHome::class.java)
+//
+
                     intent.putExtra("creator_id", creatorId)
-                    startActivity(intent)
                     setResult(Activity.RESULT_OK)
+                    startActivity(intent)
                     finish()
                 }
             } catch (e: HttpException) {

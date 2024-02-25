@@ -4,6 +4,7 @@ import com.example.ram.details.DetailsClass
 import com.example.ram.homepage.AppointmentResponse
 import com.example.ram.homepage.CreateAppointment
 import com.example.ram.login.LoginResponse
+import com.example.ram.token.CSRFTokenResponse
 import com.google.gson.JsonObject
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -13,6 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
 import retrofit2.http.DELETE
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface ApiService {
@@ -22,6 +24,7 @@ interface ApiService {
         @Field("user_id") userId: String,
         @Field("password") password: String
     ): Response<LoginResponse>
+
 
 
     // For Creating Schedules
@@ -69,4 +72,17 @@ interface ApiService {
     fun deleteSchedule(
         @Field("reference_id") referenceId: String
     ): Call<Void>
+
+
+
+    // TOKEN
+    @GET("csrf-token")
+    fun getCSRFToken(): Call<CSRFTokenResponse>
+
+    @POST("login")
+    fun loginWithCsrfToken(
+        @Query("user_id") userId: String,
+        @Query("password") password: String,
+        @Query("_token") csrfToken: String
+    ): Call<LoginResponse>
 }
