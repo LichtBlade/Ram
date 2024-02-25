@@ -45,9 +45,9 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
         holder.answer.visibility = if (isExpandable){ View.VISIBLE  }else View.GONE
 
         if (!isExpandable){
-            holder.arrow.text = "V"
+            holder.arrow.text = "▼"
         }else{
-            holder.arrow.text = "A"
+            holder.arrow.text = "▲"
         }
 
 

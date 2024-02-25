@@ -71,8 +71,10 @@ class Activity_reference : AppCompatActivity() {
                 val response = scheduleApiService.sendScheduleData(requestBody)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@Activity_reference, "SHEESHHHH", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@Activity_reference, ActivityHome::class.java))
+//                    startActivity(Intent(this@Activity_reference, ActivityHome::class.java))
+                    val intent = Intent(this@Activity_reference, ActivityHome::class.java)
                     intent.putExtra("creator_id", creatorId)
+                    startActivity(intent)
                     setResult(Activity.RESULT_OK)
                     finish()
                 }

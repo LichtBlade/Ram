@@ -40,11 +40,15 @@ interface ApiService {
     // FOR FETCHING NAME AND EMAILS
 
     @GET("users/{user_id}/info")
-    fun fetchUserDetails(@Query("user_id") userId: String): Call<DetailsClass>
+    fun fetchUserDetails(
+        @Query("user_id") userId: String
+    ): Call<DetailsClass>
 
 
     @GET("appointment/created")
-    fun getAppointmentsForCreatorId(@Query("creator_id") creatorId: String): Call<AppointmentResponse>
+    fun getAppointmentsForCreatorId(
+        @Query("creator_id") creatorId: String
+    ): Call<AppointmentResponse>
 
 
 
@@ -59,11 +63,10 @@ interface ApiService {
         @Field("purpose") selectedPurposes: String
     ): Response<String>
 
-
+    // FOR DELETING APPOINTMENT
     @FormUrlEncoded
-    @DELETE("schedyles/delete")
+    @POST("schedules/delete") //<= may typo sa vscode
     fun deleteSchedule(
-        @Field("creator_id") creatorId: String,
         @Field("reference_id") referenceId: String
     ): Call<Void>
 }
