@@ -57,6 +57,8 @@ class ActivityHome : AppCompatActivity() {
             Drawer_Layout.openDrawer(Navigation_View)
         }
 
+
+
         val creatorId = intent.getStringExtra("creator_id")
 
         binding.btnCreateAppointment.setOnClickListener {

@@ -1,18 +1,17 @@
 package com.example.ram.homepage
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toast.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.ApiService
-import com.example.ram.GlobalVariables
 import com.example.ram.R
 import com.example.ram.appointment.DataOfAppointmentCard
-import com.example.ram.details.RetrofitClient.apiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,12 +43,21 @@ class MyAdapter(private val appointmentList: ArrayList<DataOfAppointmentCard>) :
 
         holder.deleteButton.setOnClickListener{
             val referenceId = currentItem.referenceId // Get the reference ID of the appointment to delete
-            deleteAppointment(referenceId.toString(), position)
+            showDeleteConfirmationDialog(referenceId.toString(), position, holder.itemView.context)
         }
-        holder.editButton.setOnClickListener {
+    }
 
-        }
-
+    private fun showDeleteConfirmationDialog(referenceId: String, position: Int, context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle("Delete Confirmation")
+            .setMessage("Are you sure you want to delete this item?")
+            .setPositiveButton(android.R.string.yes) { dialog, which ->
+                // User clicked Yes button, proceed with delete
+                deleteAppointment(referenceId, position)
+            }
+            .setNegativeButton(android.R.string.no, null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
     }
 
     private fun deleteAppointment(referenceId: String, position: Int) {
