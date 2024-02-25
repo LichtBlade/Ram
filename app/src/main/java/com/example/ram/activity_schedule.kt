@@ -34,7 +34,10 @@ class activity_schedule : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+//return button
+        binding.btnReturn.setOnClickListener{
+            onBackPressed()
+        }
         val creatorId = intent.getStringExtra("creator_id")
         val selectedPurposes = intent.getStringExtra("selectedPurposes")
         val requirements = intent.getStringExtra("requirements")
@@ -170,5 +173,8 @@ class activity_schedule : AppCompatActivity() {
             }
             return view
         }
+
+
+
     }
 }
