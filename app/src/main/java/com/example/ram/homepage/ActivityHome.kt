@@ -52,6 +52,14 @@ class ActivityHome : AppCompatActivity() {
     private lateinit var Navigation_View: NavigationView
     private lateinit var Drawer_Layout: DrawerLayout
 
+    // For back press
+    private var backPressedTime: Long = 0
+    private val backToast: Toast by lazy {
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT)
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -186,15 +194,24 @@ class ActivityHome : AppCompatActivity() {
         }
     }
 
+
+
     // Set a listener for the DrawerLayout to close the drawer when tapped outside
     override fun onBackPressed() {
         // Check if the drawer is open, if so, close it on back press
         if (Drawer_Layout.isDrawerOpen(GravityCompat.START)) {
             Drawer_Layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                super.onBackPressed()
+                return
+            } else {
+                backToast.show()
+            }
+            backPressedTime = System.currentTimeMillis()
         }
     }
+
 
     private fun setNavigationItemSelectedListener(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -263,6 +280,8 @@ class ActivityHome : AppCompatActivity() {
                     Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
+
+
         }
     }
 
