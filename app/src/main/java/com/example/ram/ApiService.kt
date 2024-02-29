@@ -90,7 +90,7 @@ interface ApiService {
     ): Call<LoginResponse>
 
     // Update Schedule
-    @PUT("/appointments/{reference_id}")
+    @PUT("appointments/{reference_id}")
     fun rescheduleAppointment(
         @Path("reference_id") referenceId: String,
         @Body appointment: UpdateSchedule

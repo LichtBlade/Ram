@@ -135,8 +135,8 @@ class activity_schedule : AppCompatActivity() {
                 intent.putExtra("selectedStartTime", selectedStartTime)
                 intent.putExtra("selectedEndTime", selectedEndTime)
                 intent.putExtra("creator_id", creatorId)
-
                 startActivity(intent)
+
             } else {
                 Toast.makeText(
                     this,

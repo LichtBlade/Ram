@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class Activity_details : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
@@ -82,7 +84,10 @@ class Activity_details : AppCompatActivity() {
         // Set text to TextViews
         purposeTextView.text = selectedPurposes
 
-        dateTextView.text = selectedDate.toString()
+        val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(selectedDate)
+
+
+        dateTextView.text = formattedDate.toString()
         timeTextView.text = "$selectedStartTime - $selectedEndTime"
         reqTextView.text = requirements
         paymentTextView.text = paymentInfo
@@ -98,6 +103,7 @@ class Activity_details : AppCompatActivity() {
             intent.putExtra("selectedEndTime", selectedEndTime)
             intent.putExtra("creator_id", creatorId)
             startActivity(intent)
+            finish()
         }
     }
 

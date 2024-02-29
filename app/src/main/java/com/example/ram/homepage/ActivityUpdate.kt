@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.ram.ApiService
+import com.example.ram.GlobalVariables
 import com.example.ram.databinding.ActivityActitvityUpdateBinding
 import com.example.ram.databinding.ActivityHomeBinding
 import com.example.ram.details.Activity_details
@@ -141,12 +142,15 @@ class ActivityUpdate : AppCompatActivity() {
                 calendar.add(Calendar.HOUR, 1)
                 val selectedEndTime = format.format(calendar.time)
 
-                val intent = Intent(this, ActivityHomeBinding::class.java)
+
                 val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(selectedDate)
-                val updateSchedule = UpdateSchedule(formattedDate.toString(), selectedStartTime, selectedEndTime)
+                val endTime = selectedEndTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "").padStart(5, '0')
+                val startTime = selectedStartTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "")
+
+                val updateSchedule = UpdateSchedule(formattedDate.toString(), startTime, endTime)
+
                 updateSched(referenceId.toString(), updateSchedule)
 
-                startActivity(intent)
             } else {
                 Toast.makeText(
                     this,
@@ -203,6 +207,9 @@ class ActivityUpdate : AppCompatActivity() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     // Update was successful, you may want to update the UI or notify the user
+                    val intent = Intent(this@ActivityUpdate, ActivityHomeBinding::class.java)
+
+                    startActivity(intent)
                 } else {
                     // Handle unsuccessful response
                 }
