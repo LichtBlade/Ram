@@ -113,7 +113,7 @@ class ActivityHome : AppCompatActivity() {
         newRecyclerView = findViewById(R.id.recyclerView)
         newRecyclerView.layoutManager = LinearLayoutManager(this)
         newArrayList = ArrayList()
-        myAdapter = MyAdapter(newArrayList)
+        myAdapter = MyAdapter(newArrayList, this)
         newRecyclerView.adapter = myAdapter
 
         // Fetch data from API

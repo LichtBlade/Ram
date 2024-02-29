@@ -3,6 +3,7 @@ package com.example.ram
 import com.example.ram.details.DetailsClass
 import com.example.ram.homepage.AppointmentResponse
 import com.example.ram.homepage.CreateAppointment
+import com.example.ram.homepage.UpdateSchedule
 import com.example.ram.login.LoginResponse
 import com.example.ram.token.CSRFTokenResponse
 import com.google.gson.JsonObject
@@ -13,8 +14,10 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Headers
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface ApiService {
@@ -85,4 +88,11 @@ interface ApiService {
         @Query("password") password: String,
         @Query("_token") csrfToken: String
     ): Call<LoginResponse>
+
+    // Update Schedule
+    @PUT("/appointments/{reference_id}")
+    fun rescheduleAppointment(
+        @Path("reference_id") referenceId: String,
+        @Body appointment: UpdateSchedule
+    ): Call<Void>
 }
