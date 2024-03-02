@@ -90,7 +90,7 @@ class Activity_details : AppCompatActivity() {
         dateTextView.text = formattedDate.toString()
         timeTextView.text = "$selectedStartTime - $selectedEndTime"
         reqTextView.text = requirements
-        paymentTextView.text = paymentInfo
+        paymentTextView.text = "N/A"
 
         fetchUserDetails(creatorId.toString(), this)
 

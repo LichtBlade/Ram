@@ -227,6 +227,8 @@ class ActivityHome : AppCompatActivity() {
                 builder.setMessage("Are you sure you want to logout?")
                 builder.setPositiveButton("Yes") { dialogInterface, _ ->
                     val intent = Intent(this, MainActivity::class.java)
+                    //FLAG_ACTIVITY_CLEAR_TASK para di mag back sa home after logout???
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 }

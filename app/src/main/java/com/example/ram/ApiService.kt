@@ -60,7 +60,7 @@ interface ApiService {
 
     // FOR DETAILS POST
     @FormUrlEncoded
-    @POST("/schedules/create")
+    @POST("schedules/create")
     suspend fun sendDataToBackend(
         @Field("creator_id") creatorId: String?,
         @Field("scheduled_date") formattedDate: String,

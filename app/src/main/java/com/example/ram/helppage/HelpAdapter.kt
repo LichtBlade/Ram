@@ -1,9 +1,11 @@
 package com.example.searchviewkotlin
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.R
@@ -17,6 +19,7 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
         val answer: TextView = itemView.findViewById(R.id.textView_answers)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
         val arrow: TextView = itemView.findViewById(R.id.textView_dropdown)
+        val card: CardView = itemView.findViewById(R.id.cv_question)
 
         fun collapseExpandedView(){
             answer.visibility = View.GONE
@@ -46,8 +49,16 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
 
         if (!isExpandable){
             holder.arrow.text = "▼"
+            holder.arrow.setTextColor(Color.parseColor("#3A3A3A"))
+            holder.title.setTextColor(Color.parseColor("#3A3A3A"))
+            holder.answer.setTextColor(Color.parseColor("#3A3A3A"))
+            holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
         }else{
             holder.arrow.text = "▲"
+            holder.arrow.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.title.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.answer.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.card.setCardBackgroundColor(Color.parseColor("#5D8E7D"))
         }
 
 
