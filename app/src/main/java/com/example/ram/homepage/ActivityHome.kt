@@ -21,8 +21,8 @@ import com.example.ram.R
 import com.example.ram.appointment.AppointmentPurpose
 import com.example.ram.appointment.DataOfAppointmentCard
 import com.example.ram.databinding.ActivityHomeBinding
-import com.example.ram.databinding.ActivityMainBinding
 import com.example.ram.helppage.HelpScreen
+import com.example.ram.homepage.history.HistoryActivity
 import com.example.ram.login.MainActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
@@ -165,8 +165,11 @@ class ActivityHome : AppCompatActivity() {
     // Function to update RecyclerView with new data
     private fun updateRecyclerView(appointments: List<Appointment>) {
         newArrayList.clear() // Clear existing data
-        if (appointments.isNotEmpty()) {
-            newArrayList.addAll(appointments.map { appointment ->
+
+        val filteredAppointments = appointments.filter { it.status.equals("DONE", ignoreCase = true).not() && it.status.equals("CANCELLED", ignoreCase = true).not() }
+
+        if (filteredAppointments.isNotEmpty()) {
+            newArrayList.addAll(filteredAppointments.map { appointment ->
                 DataOfAppointmentCard(
                     appointment.referenceId,
                     appointment.scheduledDate,
@@ -177,7 +180,7 @@ class ActivityHome : AppCompatActivity() {
             })
             myAdapter.notifyDataSetChanged() // Notify adapter of dataset change
         } else {
-            // Handle case where appointments list is empty
+            // Handle case where filtered appointments list is empty
             // For example, show a message indicating no appointments
         }
     }
@@ -214,6 +217,7 @@ class ActivityHome : AppCompatActivity() {
 
 
     private fun setNavigationItemSelectedListener(item: MenuItem): Boolean {
+        val creatorId = intent.getStringExtra("creator_id")
         when (item.itemId) {
             R.id.nav_help -> {
                 val intent = Intent(this, HelpScreen::class.java)
@@ -237,6 +241,13 @@ class ActivityHome : AppCompatActivity() {
                 }
                 val dialog = builder.create()
                 dialog.show()
+            }
+        }
+        when(item.itemId){
+            R.id.nav_history -> {
+                val intent = Intent (this@ActivityHome,HistoryActivity::class.java)
+                intent.putExtra("creator_id", creatorId)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

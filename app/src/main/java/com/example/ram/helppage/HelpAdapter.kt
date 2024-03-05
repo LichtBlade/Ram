@@ -64,11 +64,15 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
 
 
         holder.constraintLayout.setOnClickListener {
-            isAnyItemExpanded(position)
-            currentItem.isExpandable = !currentItem.isExpandable
-            notifyItemChanged(position , Unit)
-        }
+            val previousExpandedPosition = mList.indexOfFirst { it.isExpandable }
+            if (previousExpandedPosition != -1 && previousExpandedPosition != position) {
+                mList[previousExpandedPosition].isExpandable = false
+                notifyItemChanged(previousExpandedPosition)
+            }
 
+            currentItem.isExpandable = !currentItem.isExpandable
+            notifyItemChanged(position)
+        }
     }
 
     private fun isAnyItemExpanded(position: Int){

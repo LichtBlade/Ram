@@ -3,10 +3,9 @@ package com.example.ram
 import com.example.ram.details.DetailsClass
 import com.example.ram.homepage.AppointmentResponse
 import com.example.ram.homepage.CreateAppointment
-import com.example.ram.homepage.UpdateSchedule
+import com.example.ram.homepage.update.UpdateSchedule
 import com.example.ram.login.LoginResponse
 import com.example.ram.token.CSRFTokenResponse
-import com.google.gson.JsonObject
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -15,8 +14,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.Headers
 import retrofit2.http.PUT
 import retrofit2.http.Query
 

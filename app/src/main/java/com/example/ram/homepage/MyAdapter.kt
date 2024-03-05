@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.ApiService
 import com.example.ram.R
 import com.example.ram.appointment.DataOfAppointmentCard
-import com.example.ram.homepage.ActivityUpdate
+import com.example.ram.homepage.update.ActivityUpdate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,18 +58,28 @@ class MyAdapter(
             editButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(context, ActivityUpdate::class.java)
-                    val referenceId = appointmentList[position].referenceId.toString()
-                    intent.putExtra("reference_id", referenceId)
-                    context.startActivity(intent)
+                    val statusText = appointmentList[position].status
+                    if (statusText != "approved") {
+                        val intent = Intent(context, ActivityUpdate::class.java)
+                        val referenceId = appointmentList[position].referenceId.toString()
+                        intent.putExtra("reference_id", referenceId)
+                        context.startActivity(intent)
+                    } else{
+                        Toast.makeText(context, "bla bla bla", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
             deleteButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val referenceId = appointmentList[position].referenceId.toString()
-                    showDeleteConfirmationDialog(referenceId, position)
+                    val statusText = appointmentList[position].status
+                    if (statusText != "approved") {
+                        val referenceId = appointmentList[position].referenceId.toString()
+                        showDeleteConfirmationDialog(referenceId, position)
+                    }else{
+                        Toast.makeText(context, "Don't bla bla", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

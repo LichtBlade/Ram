@@ -1,4 +1,4 @@
-package com.example.ram.homepage
+package com.example.ram.homepage.update
 
 import android.content.Context
 import android.content.Intent
@@ -8,17 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import com.example.ram.ApiService
-import com.example.ram.GlobalVariables
 import com.example.ram.databinding.ActivityActitvityUpdateBinding
 import com.example.ram.databinding.ActivityHomeBinding
-import com.example.ram.details.Activity_details
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,9 +47,6 @@ class ActivityUpdate : AppCompatActivity() {
         binding.btnReturn.setOnClickListener{
             onBackPressed()
         }
-        val creatorId = intent.getStringExtra("creator_id")
-        val selectedPurposes = intent.getStringExtra("selectedPurposes")
-        val requirements = intent.getStringExtra("requirements")
 
         val spinner: Spinner = binding.dropdownSpinner
         val items = arrayOf(

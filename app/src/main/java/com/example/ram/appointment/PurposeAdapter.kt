@@ -84,13 +84,13 @@ class PurposeAdapter(
         val isExpandable: Boolean = purpose[position].isExpandable
         holder.requirement.visibility = if (isExpandable) View.VISIBLE else View.GONE
 
-        if (!isExpandable){
+        if (!isExpandable) {
             holder.arrow.text = "▼"
             holder.arrow.setTextColor(Color.parseColor("#3A3A3A"))
             holder.purposeOfVisit.setTextColor(Color.parseColor("#3A3A3A"))
             holder.requirement.setTextColor(Color.parseColor("#3A3A3A"))
             holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
-        }else{
+        } else {
             holder.arrow.text = "▲"
             holder.arrow.setTextColor(Color.parseColor("#FFFFFF"))
             holder.purposeOfVisit.setTextColor(Color.parseColor("#FFFFFF"))
@@ -99,9 +99,14 @@ class PurposeAdapter(
         }
 
         holder.constraintLayout.setOnClickListener {
-            isAnyItemExpanded(position)
+            val previousExpandedPosition = purpose.indexOfFirst { it.isExpandable }
+            if (previousExpandedPosition != -1 && previousExpandedPosition != position) {
+                purpose[previousExpandedPosition].isExpandable = false
+                notifyItemChanged(previousExpandedPosition)
+            }
+
             purpose[position].isExpandable = !isExpandable
-            notifyItemChanged(position, Unit)
+            notifyItemChanged(position)
         }
     }
 

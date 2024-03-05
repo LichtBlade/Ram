@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
                             GlobalVariables.userID = loginResponse?.userId
                             GlobalVariables.loginTime = loginResponse?.loginTime
 
-
                             val intent = Intent(context, ActivityHome::class.java)
                             intent.putExtra("creator_id", user_id)
                             context.startActivity(intent)
