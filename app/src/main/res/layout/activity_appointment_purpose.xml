@@ -59,6 +59,7 @@
         app:cardBackgroundColor="#00FFFFFF"
         app:cardCornerRadius="30dp"
         app:contentPadding="1dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
