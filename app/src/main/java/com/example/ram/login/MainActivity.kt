@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.tvHelp?.setOnClickListener {
             startActivity(
-                Intent(this, Activity_details::class.java)
+                Intent(this, HelpScreen::class.java)
             )
         }
     }
@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                             val loginResponse = response.body()
                             GlobalVariables.userID = loginResponse?.userId
                             GlobalVariables.loginTime = loginResponse?.loginTime
-
 
                             val intent = Intent(context, ActivityHome::class.java)
                             intent.putExtra("creator_id", user_id)

@@ -1,5 +1,6 @@
 package com.example.ram.appointment
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.R
@@ -23,6 +25,8 @@ class PurposeAdapter(
         val requirement: TextView = itemView.findViewById(R.id.tv_requirements)
         val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
+        val arrow: TextView = itemView.findViewById(R.id.textView_dropdown)
+        val card: CardView = itemView.findViewById(R.id.cv_purpose)
 
         init {
             checkBox.setOnClickListener {
@@ -73,15 +77,36 @@ class PurposeAdapter(
     }
 
     override fun onBindViewHolder(holder: PurposeViewHolder, position: Int) {
+        val currentItem = purpose[position]
         holder.bind(purpose[position])
+        holder.arrow.text = currentItem.arrowSign
 
         val isExpandable: Boolean = purpose[position].isExpandable
         holder.requirement.visibility = if (isExpandable) View.VISIBLE else View.GONE
 
+        if (!isExpandable) {
+            holder.arrow.text = "▼"
+            holder.arrow.setTextColor(Color.parseColor("#3A3A3A"))
+            holder.purposeOfVisit.setTextColor(Color.parseColor("#3A3A3A"))
+            holder.requirement.setTextColor(Color.parseColor("#3A3A3A"))
+            holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+        } else {
+            holder.arrow.text = "▲"
+            holder.arrow.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.purposeOfVisit.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.requirement.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.card.setCardBackgroundColor(Color.parseColor("#5D8E7D"))
+        }
+
         holder.constraintLayout.setOnClickListener {
-            isAnyItemExpanded(position)
+            val previousExpandedPosition = purpose.indexOfFirst { it.isExpandable }
+            if (previousExpandedPosition != -1 && previousExpandedPosition != position) {
+                purpose[previousExpandedPosition].isExpandable = false
+                notifyItemChanged(previousExpandedPosition)
+            }
+
             purpose[position].isExpandable = !isExpandable
-            notifyItemChanged(position, Unit)
+            notifyItemChanged(position)
         }
     }
 

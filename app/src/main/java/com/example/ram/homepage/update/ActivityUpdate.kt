@@ -1,4 +1,4 @@
-package com.example.ram
+package com.example.ram.homepage.update
 
 import android.content.Context
 import android.content.Intent
@@ -8,19 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import com.example.ram.databinding.ActivityScheduleBinding
-import com.example.ram.details.Activity_details
+import com.example.ram.ApiService
+import com.example.ram.databinding.ActivityActitvityUpdateBinding
+import com.example.ram.databinding.ActivityHomeBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
-class activity_schedule : AppCompatActivity() {
-    private lateinit var binding: ActivityScheduleBinding
+class ActivityUpdate : AppCompatActivity() {
+    private lateinit var binding: ActivityActitvityUpdateBinding
     private lateinit var nextButton: Button
     private var userSelectedDate: Long = 0
     private val maxBookingsPerTimeSlot = 5  // Limit one booking per time slot
@@ -32,15 +36,17 @@ class activity_schedule : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityScheduleBinding.inflate(layoutInflater)
+        binding = ActivityActitvityUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val referenceId = intent.getStringExtra("reference_id")
+
+        
+
 //return button
         binding.btnReturn.setOnClickListener{
             onBackPressed()
         }
-        val creatorId = intent.getStringExtra("creator_id")
-        val selectedPurposes = intent.getStringExtra("selectedPurposes")
-        val requirements = intent.getStringExtra("requirements")
 
         val spinner: Spinner = binding.dropdownSpinner
         val items = arrayOf(
@@ -80,6 +86,8 @@ class activity_schedule : AppCompatActivity() {
 
             (spinner.adapter as CustomArrayAdapter).setFullyBookedTimeSlots(fullyBookedTimeSlots)
         }
+
+
 
         val adapter = CustomArrayAdapter(this, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -127,15 +135,14 @@ class activity_schedule : AppCompatActivity() {
                 calendar.add(Calendar.HOUR, 1)
                 val selectedEndTime = format.format(calendar.time)
 
-                val intent = Intent(this, Activity_details::class.java)
-                intent.putExtra("selectedPurposes", selectedPurposes)
-                intent.putExtra("requirements", requirements)
-                intent.putExtra("paymentInfo", "paymentInfo")
-                intent.putExtra("selectedDate", userSelectedDate)
-                intent.putExtra("selectedStartTime", selectedStartTime)
-                intent.putExtra("selectedEndTime", selectedEndTime)
-                intent.putExtra("creator_id", creatorId)
-                startActivity(intent)
+
+                val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(selectedDate)
+                val endTime = selectedEndTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "").padStart(5, '0')
+                val startTime = selectedStartTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "")
+
+                val updateSchedule = UpdateSchedule(formattedDate.toString(), startTime, endTime)
+
+                updateSched(referenceId.toString(), updateSchedule)
 
             } else {
                 Toast.makeText(
@@ -176,5 +183,36 @@ class activity_schedule : AppCompatActivity() {
 
 
 
+
+
     }
+
+    private fun updateSched(referenceId: String, updatedSchedule: UpdateSchedule) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://64.23.183.4/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+        val requestCall: Call<Void> = apiService.rescheduleAppointment(referenceId, updatedSchedule)
+
+        requestCall.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    // Update was successful, you may want to update the UI or notify the user
+                    val intent = Intent(this@ActivityUpdate, ActivityHomeBinding::class.java)
+
+                    startActivity(intent)
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // Handle failure here
+                t.printStackTrace()
+            }
+        })
+    }
+
 }
