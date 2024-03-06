@@ -37,7 +37,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="379dp"
-        android:layout_height="818dp"
+        android:layout_height="770dp"
         android:layout_marginTop="31dp"
         app:cardBackgroundColor="#17000000"
         app:cardCornerRadius="30dp"
@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_help"
+                android:id="@+id/recycler_history"
                 android:layout_width="378dp"
                 android:layout_height="690dp"
                 android:layout_marginTop="16dp"

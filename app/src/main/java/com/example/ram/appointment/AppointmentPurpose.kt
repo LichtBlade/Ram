@@ -12,6 +12,7 @@ import com.example.ram.activity_schedule
 import com.example.ram.databinding.ActivityAppointmentPurposeBinding
 
 
+
 class AppointmentPurpose : AppCompatActivity() {
     private lateinit var binding: ActivityAppointmentPurposeBinding
 

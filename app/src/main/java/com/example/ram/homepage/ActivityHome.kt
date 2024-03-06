@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.ram.ApiService
 import com.example.ram.R
 import com.example.ram.appointment.AppointmentPurpose
@@ -58,6 +60,9 @@ class ActivityHome : AppCompatActivity() {
         Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT)
     }
 
+    // For refreshing the home page
+    lateinit var refreshLayout: SwipeRefreshLayout
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +82,7 @@ class ActivityHome : AppCompatActivity() {
             Drawer_Layout.openDrawer(Navigation_View)
         }
 
-
+        refreshLayout = findViewById(R.id.refresher)
 
         val creatorId = intent.getStringExtra("creator_id")
 
@@ -85,6 +90,14 @@ class ActivityHome : AppCompatActivity() {
             val intent = Intent(this, AppointmentPurpose::class.java)
             intent.putExtra("creator_id", creatorId)
             startActivityForResult(intent, CREATE_APPOINTMENT_REQUEST_CODE)
+        }
+
+        // For refreshing home page
+        refreshLayout.setOnRefreshListener {
+            fetchDataFromAPI(creatorId)
+            Handler().postDelayed(Runnable {
+                refreshLayout.isRefreshing = false
+            }, 1000)
         }
 
         Drawer_Layout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
