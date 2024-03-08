@@ -56,7 +56,7 @@ class Activity_reference : AppCompatActivity() {
         val referenceId = referenceIds.first()
 
         binding.tvReferenceID.text = referenceId
-        binding.tvDatetime.text = "$selectedStartTime, $Date"
+        binding.tvDatetime.text = "$selectedStartTime - $selectedEndTime ,  $Date"
 
         binding.btnHome.setOnClickListener {
             sendDataToBackend(creator_id, selectedDate, referenceId, startTime, endTime, selectedPurposes)

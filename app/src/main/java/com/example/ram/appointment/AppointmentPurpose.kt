@@ -3,7 +3,6 @@ package com.example.ram.appointment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -99,9 +98,7 @@ class AppointmentPurpose : AppCompatActivity() {
         getUserData()
 
         binding.btnNext.setOnClickListener {
-            if (selectedPurposeDetails.isEmpty()) {
-                Toast.makeText(this, "You need to select at least one purpose.", Toast.LENGTH_SHORT).show()
-            } else {
+            if (newArrayList.any { it.isSelected }) {
                 val purposesString = selectedPurposeDetails.joinToString(", ") { it.purpose.toString() }
                 val requirementsString = selectedPurposeDetails.joinToString(", ") { it.requirements.toString() }
 //                val paymentInfoString = selectedPurposeDetails.joinToString(", ") { it.paymentInfo }.toString()
@@ -112,6 +109,8 @@ class AppointmentPurpose : AppCompatActivity() {
 //                intent.putExtra("paymentInfo", paymentInfoString)
                 intent.putExtra("creator_id", creatorId)
                 startActivity(intent)
+            } else {
+                Toast.makeText(this, "You need to select at least one purpose.", Toast.LENGTH_SHORT).show()
             }
         }
     }

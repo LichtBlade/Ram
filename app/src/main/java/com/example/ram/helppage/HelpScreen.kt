@@ -2,6 +2,7 @@ package com.example.ram.helppage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.R
@@ -22,6 +23,11 @@ class HelpScreen : AppCompatActivity() {
         addDataToList()
         adapter = HelpAdapter(mList)
         recyclerView.adapter = adapter
+
+        val btnReturn = findViewById<Button>(R.id.btn_return)
+        btnReturn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun addDataToList() {
@@ -67,5 +73,9 @@ class HelpScreen : AppCompatActivity() {
                 "Yes! You can set an appointment for them, Just make sure to provide an authorization letter during appointment period."
             )
         )
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

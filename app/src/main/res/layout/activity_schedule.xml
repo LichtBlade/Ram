@@ -24,6 +24,18 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         tools:ignore="TextSizeCheck" />
 
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ram_inverted" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_start"
@@ -73,15 +85,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/alphagradient">
 
-            <ImageView
-                android:id="@+id/img_logo"
-                android:layout_width="100dp"
-                android:layout_height="75dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.025"
-                app:srcCompat="@drawable/ram" />
-
             <TextView
                 android:id="@+id/tv_Schedule"
                 android:layout_width="wrap_content"
@@ -91,7 +94,7 @@
                 android:text="Select Schedule"
                 android:textColor="@color/gray"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/img_logo"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.409" />
@@ -102,7 +105,7 @@
                 android:layout_height="306dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/calendarborder"
-                app:layout_constraintTop_toBottomOf="@id/img_logo"
+                app:layout_constraintTop_toBottomOf="@id/tv_Schedule"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

@@ -36,23 +36,53 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/poppins"
+        android:text="Return"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_center"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toTopOf="@+id/gl_top"
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_end"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ram_inverted" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="378dp"
         android:layout_height="701dp"
-        android:layout_marginTop="31dp"
-        app:cardBackgroundColor="#17000000"
+        android:layout_marginTop="70dp"
+        app:cardBackgroundColor="#00FFFFFF"
         app:cardCornerRadius="30dp"
         app:contentPadding="1dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/gl_top">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/alphagradient">
 
             <TextView
                 android:id="@+id/tv_help"

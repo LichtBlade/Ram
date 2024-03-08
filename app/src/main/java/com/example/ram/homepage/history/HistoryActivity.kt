@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ram.ApiService
@@ -48,6 +49,11 @@ class HistoryActivity : AppCompatActivity() {
         // Fetch data from API
         if (creatorId != null) {
             fetchDataFromAPI(creatorId)
+        }
+
+        val btnReturn = findViewById<Button>(R.id.btn_return)
+        btnReturn.setOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -123,5 +129,9 @@ class HistoryActivity : AppCompatActivity() {
     }
     companion object {
         private const val CREATE_APPOINTMENT_REQUEST_CODE = 100
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

@@ -107,8 +107,6 @@ class Activity_details : AppCompatActivity() {
         }
     }
 
-
-
     @SuppressLint("SetTextI18n")
     private fun fetchUserDetails(userId: String, context: Context) {
         val retrofit = Retrofit.Builder()
@@ -145,12 +143,6 @@ class Activity_details : AppCompatActivity() {
             }
         }
     }
-
-
-
-
-
-
 }
 
 
