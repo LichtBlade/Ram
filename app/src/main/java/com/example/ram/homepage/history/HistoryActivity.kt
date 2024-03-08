@@ -39,7 +39,7 @@ class HistoryActivity : AppCompatActivity() {
 
 
         // Initialize RecyclerView and Adapter
-        newRecyclerView = findViewById(R.id.recyclerview_help)
+        newRecyclerView = findViewById(R.id.recycler_history)
         newRecyclerView.layoutManager = LinearLayoutManager(this)
         newArrayList = ArrayList()
         myAdapter = MyAdapter(newArrayList, this)
