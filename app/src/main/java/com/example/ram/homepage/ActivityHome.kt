@@ -183,10 +183,14 @@ class ActivityHome : AppCompatActivity() {
 
         if (filteredAppointments.isNotEmpty()) {
             newArrayList.addAll(filteredAppointments.map { appointment ->
+                val time = appointment.startTime
+                val formattedTime = time.substring(0, 5)
+
+
                 DataOfAppointmentCard(
                     appointment.referenceId,
                     appointment.scheduledDate,
-                    "${appointment.startTime}",
+                    "${formattedTime}",
                     appointment.purpose,
                     appointment.status
                 )
