@@ -47,21 +47,29 @@ class HelpAdapter(private var mList: List<DataOfHelpCard>) :
         val isExpandable: Boolean = currentItem.isExpandable
         holder.answer.visibility = if (isExpandable){ View.VISIBLE  }else View.GONE
 
-        if (!isExpandable){
-            holder.arrow.text = "▼"
-            holder.arrow.setTextColor(Color.parseColor("#3A3A3A"))
-            holder.title.setTextColor(Color.parseColor("#3A3A3A"))
-            holder.answer.setTextColor(Color.parseColor("#3A3A3A"))
-            holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
-        }else{
-            holder.arrow.text = "▲"
-            holder.arrow.setTextColor(Color.parseColor("#FFFFFF"))
-            holder.title.setTextColor(Color.parseColor("#FFFFFF"))
-            holder.answer.setTextColor(Color.parseColor("#FFFFFF"))
-            holder.card.setCardBackgroundColor(Color.parseColor("#5D8E7D"))
-        }
 
+        // kenth - pinalitan ko lang para maikli yung code
+        holder.arrow.text = if (isExpandable) "▲" else "▼"
+        val textColor = if (isExpandable) Color.parseColor("#FFFFFF") else Color.parseColor("#3A3A3A")
+        val backgroundColor = if (isExpandable) Color.parseColor("#5D8E7D") else Color.parseColor("#FFFFFF")
 
+        holder.arrow.setTextColor(textColor)
+        holder.title.setTextColor(textColor)
+        holder.answer.setTextColor(textColor)
+        holder.card.setCardBackgroundColor(backgroundColor)
+//        if (!isExpandable){
+//            holder.arrow.text = "▼"
+//            holder.arrow.setTextColor(Color.parseColor("#3A3A3A"))
+//            holder.title.setTextColor(Color.parseColor("#3A3A3A"))
+//            holder.answer.setTextColor(Color.parseColor("#3A3A3A"))
+//            holder.card.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+//        }else{
+//            holder.arrow.text = "▲"
+//            holder.arrow.setTextColor(Color.parseColor("#FFFFFF"))
+//            holder.title.setTextColor(Color.parseColor("#FFFFFF"))
+//            holder.answer.setTextColor(Color.parseColor("#FFFFFF"))
+//            holder.card.setCardBackgroundColor(Color.parseColor("#5D8E7D"))
+//        }
 
         holder.constraintLayout.setOnClickListener {
             val previousExpandedPosition = mList.indexOfFirst { it.isExpandable }

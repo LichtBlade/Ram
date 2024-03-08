@@ -44,6 +44,7 @@ class Activity_reference : AppCompatActivity() {
         val selectedStartTime = intent.getStringExtra("selectedStartTime") ?: ""
         val selectedEndTime = intent.getStringExtra("selectedEndTime") ?: ""
         val creator_id = intent.getStringExtra("creator_id")
+        val Date = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(selectedDate)
 
         val startTime = selectedStartTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "")
         val endTime = selectedEndTime.replace("\\s*(am|pm)\\b".toRegex(RegexOption.IGNORE_CASE), "").padStart(5, '0')
@@ -55,6 +56,7 @@ class Activity_reference : AppCompatActivity() {
         val referenceId = referenceIds.first()
 
         binding.tvReferenceID.text = referenceId
+        binding.tvDatetime.text = "$selectedStartTime, $Date"
 
         binding.btnHome.setOnClickListener {
             sendDataToBackend(creator_id, selectedDate, referenceId, startTime, endTime, selectedPurposes)

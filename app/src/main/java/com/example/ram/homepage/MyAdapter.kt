@@ -84,12 +84,18 @@ class MyAdapter(
             }
         }
 
+        // hide buttons
         fun bind(appointment: DataOfAppointmentCard) {
             referenceId.text = appointment.referenceId.toString()
             scheduleDate.text = appointment.scheduleDate
             scheduleTime.text = appointment.scheduleTime
             purpose.text = appointment.purpose
             status.text = appointment.status
+
+            if (appointment.status == "done" || appointment.status == "cancelled") {
+                editButton.visibility = View.INVISIBLE
+                deleteButton.visibility = View.INVISIBLE
+            }
         }
 
         private fun showDeleteConfirmationDialog(referenceId: String, position: Int) {
