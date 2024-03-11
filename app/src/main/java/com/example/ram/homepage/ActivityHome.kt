@@ -250,6 +250,7 @@ class ActivityHome : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     //FLAG_ACTIVITY_CLEAR_TASK para di mag back sa home after logout???
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    clearToken()
                     startActivity(intent)
                     finish()
                 }
@@ -315,4 +316,10 @@ class ActivityHome : AppCompatActivity() {
         }
     }
 
+
+
+    private fun clearToken() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().remove("token").apply()
+    }
 }
