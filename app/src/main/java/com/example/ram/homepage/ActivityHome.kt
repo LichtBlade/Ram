@@ -27,13 +27,11 @@ import com.example.ram.helppage.HelpScreen
 import com.example.ram.homepage.history.HistoryActivity
 import com.example.ram.login.MainActivity
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
-//import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -62,8 +60,6 @@ class ActivityHome : AppCompatActivity() {
 
     // For refreshing the home page
     lateinit var refreshLayout: SwipeRefreshLayout
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -214,8 +210,6 @@ class ActivityHome : AppCompatActivity() {
         }
     }
 
-
-
     // Set a listener for the DrawerLayout to close the drawer when tapped outside
     override fun onBackPressed() {
         // Check if the drawer is open, if so, close it on back press
@@ -250,6 +244,7 @@ class ActivityHome : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     //FLAG_ACTIVITY_CLEAR_TASK para di mag back sa home after logout???
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    clearToken()
                     startActivity(intent)
                     finish()
                 }
@@ -310,9 +305,11 @@ class ActivityHome : AppCompatActivity() {
                     Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
-
-
         }
     }
 
+    private fun clearToken() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().remove("token").apply()
+    }
 }

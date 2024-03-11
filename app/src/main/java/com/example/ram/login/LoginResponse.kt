@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 class LoginResponse(
     @SerializedName("user_id") val userId: String,
-    @SerializedName("isLoggedIn") val isLoggedIn: Boolean,
+    @SerializedName("token") val token: String?,
     @SerializedName("loginTime") val loginTime: String
 )
